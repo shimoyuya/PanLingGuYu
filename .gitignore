@@ -1,0 +1,28 @@
+# 编译生成目录（必须忽略）
+/Saved/
+/Intermediate/
+/Binaries/
+/Build/
+/DerivedDataCache/
+
+# IDE配置文件
+*.sln
+*.vcxproj
+*.vcxproj.filters
+.vs/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 日志文件
+*.log
+
+# 本地编辑器配置
+/Config/DefaultEditor.ini
+
+# 临时资源
+/Content/Temp/
+
+# 完全忽略Content目录（所有资产）
+/Content/
