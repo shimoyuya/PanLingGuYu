@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "PlayerCharacter.generated.h"
 
+class UAnimMontage;
+
 UCLASS()
 class PANLINGGUYU_API APlayerCharacter : public ACharacter
 {
@@ -14,9 +16,19 @@ class PANLINGGUYU_API APlayerCharacter : public ACharacter
 public:
 	APlayerCharacter();
 	virtual void Tick(float DeltaTime) override;
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	void Attack();
 
 protected:
 	virtual void BeginPlay() override;
 
+private:
+	UPROPERTY(VisibleAnywhere)
+	class USpringArmComponent* SpringArm;
+
+	UPROPERTY(VisibleAnywhere)
+	class UCameraComponent* Camera;
+
+	UPROPERTY(EditAnywhere, Category = "Animation")
+	UAnimMontage* AttackMontage;
 };
