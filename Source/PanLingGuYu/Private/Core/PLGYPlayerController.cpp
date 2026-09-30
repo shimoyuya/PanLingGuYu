@@ -8,6 +8,9 @@
 
 void APLGYPlayerController::Move(const FInputActionValue& Value)
 {
+	APlayerCharacter* PlayerCharacter = Cast<APlayerCharacter>(GetPawn());
+	if (PlayerCharacter && PlayerCharacter->GetCharacterActionState() == EActionState::EAS_Attacking) return;
+
 	FVector2D MovementVector = Value.Get<FVector2D>();
 
 	const FRotator Rotation = GetControlRotation();
@@ -61,6 +64,15 @@ void APLGYPlayerController::Attack()
 	}
 }
 
+void APLGYPlayerController::Dodge()
+{
+	APlayerCharacter* PlayerCharacter = Cast<APlayerCharacter>(GetPawn());
+	if (PlayerCharacter)
+	{
+		PlayerCharacter->Dodge();
+	}
+}
+
 void APLGYPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -96,5 +108,9 @@ void APLGYPlayerController::SetupInputComponent()
 	if (AttackAction)
 	{
 		EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Triggered, this, &APLGYPlayerController::Attack);
+	}
+	if (DodgeAction)
+	{
+		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &APLGYPlayerController::Dodge);
 	}
 }

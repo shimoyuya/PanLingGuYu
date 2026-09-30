@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Characters/CharacterTypes.h"
 #include "PlayerCharacter.generated.h"
 
 class UAnimMontage;
@@ -18,6 +19,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	void Attack();
+	void Dodge();
 
 protected:
 	virtual void BeginPlay() override;
@@ -31,4 +33,14 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Animation")
 	UAnimMontage* AttackMontage;
+
+	UPROPERTY(EditAnywhere, Category = "Animation")
+	UAnimMontage* DodgeMontage;
+
+	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	EActionState CharacterActionState = EActionState::EAS_Unoccupied;
+
+public:
+	FORCEINLINE EActionState GetCharacterActionState() const { return CharacterActionState; }
+	void SetCharacterActionState(EActionState ActionState) { CharacterActionState = ActionState; }
 };
