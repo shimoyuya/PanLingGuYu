@@ -5,12 +5,14 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Characters/CharacterTypes.h"
+#include "Interfaces/InteractionInterface.h"
 #include "PlayerCharacter.generated.h"
 
 class UAnimMontage;
+class Item;
 
 UCLASS()
-class PANLINGGUYU_API APlayerCharacter : public ACharacter
+class PANLINGGUYU_API APlayerCharacter : public ACharacter,public IInteractionInterface
 {
 	GENERATED_BODY()
 
@@ -20,6 +22,8 @@ public:
 
 	void Attack();
 	void Dodge();
+
+	virtual void SetOverlapItem(AItem* Item) override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -39,6 +43,9 @@ private:
 
 	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	EActionState CharacterActionState = EActionState::EAS_Unoccupied;
+
+	UPROPERTY(VisibleAnywhere)
+	AItem* CurrentOverlapItem = nullptr;
 
 public:
 	FORCEINLINE EActionState GetCharacterActionState() const { return CharacterActionState; }

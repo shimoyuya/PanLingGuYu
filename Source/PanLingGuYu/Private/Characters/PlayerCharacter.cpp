@@ -56,6 +56,11 @@ void APlayerCharacter::Dodge()
 	}
 }
 
+void APlayerCharacter::SetOverlapItem(AItem* Item)
+{
+	CurrentOverlapItem = Item;
+}
+
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();

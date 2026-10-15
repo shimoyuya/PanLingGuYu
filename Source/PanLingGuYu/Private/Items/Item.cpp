@@ -3,6 +3,7 @@
 
 #include "Items/Item.h"
 #include "Components/SphereComponent.h"
+#include "Interfaces/InteractionInterface.h"
 
 AItem::AItem()
 {
@@ -33,6 +34,11 @@ void AItem::BeginPlay()
 
 void AItem::SphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	IInteractionInterface* InteractionInterface = Cast<IInteractionInterface>(OtherActor);
+	if (InteractionInterface)
+	{
+		InteractionInterface->SetOverlapItem(this);
+	}
 	if (GEngine) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("BeginOverlap"));
 	}
@@ -40,6 +46,11 @@ void AItem::SphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor*
 
 void AItem::SphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
+	IInteractionInterface* InteractionInterface = Cast<IInteractionInterface>(OtherActor);
+	if (InteractionInterface)
+	{
+		InteractionInterface->SetOverlapItem(nullptr);
+	}
 	if (GEngine) {
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("EndOverlap"));
 	}
