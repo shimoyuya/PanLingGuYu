@@ -73,6 +73,15 @@ void APLGYPlayerController::Dodge()
 	}
 }
 
+void APLGYPlayerController::Interact()
+{
+	APlayerCharacter* PlayerCharacter = Cast<APlayerCharacter>(GetPawn());
+	if (PlayerCharacter)
+	{
+		PlayerCharacter->Interact();
+	}
+}
+
 void APLGYPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -112,5 +121,9 @@ void APLGYPlayerController::SetupInputComponent()
 	if (DodgeAction)
 	{
 		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &APLGYPlayerController::Dodge);
+	}
+	if (InteractAction)
+	{
+		EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Triggered, this, &APLGYPlayerController::Interact);
 	}
 }

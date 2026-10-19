@@ -21,6 +21,7 @@ public:
 	void StopJump();
 	void Attack();
 	void Dodge();
+	void Interact();
 
 protected:
 	virtual void BeginPlay() override;
@@ -44,4 +45,7 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> DodgeAction;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	TObjectPtr<UInputAction> InteractAction;
 };

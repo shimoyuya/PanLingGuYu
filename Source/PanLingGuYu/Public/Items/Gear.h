@@ -14,4 +14,9 @@ class PANLINGGUYU_API AGear : public AItem
 {
 	GENERATED_BODY()
 	
+public:
+	AGear();
+	void Equip(USceneComponent* InParent, FName InSocketName);
+protected:
+
 };

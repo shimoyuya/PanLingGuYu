@@ -22,6 +22,7 @@ public:
 
 	void Attack();
 	void Dodge();
+	void Interact();
 
 	virtual void SetOverlapItem(AItem* Item) override;
 

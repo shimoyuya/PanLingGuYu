@@ -5,6 +5,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Items/Gear.h"
 
 APlayerCharacter::APlayerCharacter()
 {
@@ -53,6 +54,17 @@ void APlayerCharacter::Dodge()
 	{
 		AnimInstance->Montage_Play(DodgeMontage);
 		CharacterActionState = EActionState::EAS_Dodge;
+	}
+}
+
+void APlayerCharacter::Interact()
+{
+	if (!CurrentOverlapItem) { return; }
+
+	AGear* Gear = Cast<AGear>(CurrentOverlapItem);
+	if (Gear)
+	{
+		Gear->Equip(GetMesh(), FName("RightHandSocket"));
 	}
 }
 
