@@ -32,4 +32,7 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	EActionState CharacterActionState;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Movement")
+	ECharacterState CharacterState;
 };

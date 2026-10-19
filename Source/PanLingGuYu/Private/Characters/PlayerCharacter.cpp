@@ -65,6 +65,7 @@ void APlayerCharacter::Interact()
 	if (Gear)
 	{
 		Gear->Equip(GetMesh(), FName("RightHandSocket"));
+		CharacterState = ECharacterState::ECS_OneHandWeapon;
 	}
 }
 

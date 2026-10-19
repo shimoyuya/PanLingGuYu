@@ -17,6 +17,7 @@ class PANLINGGUYU_API AGear : public AItem
 public:
 	AGear();
 	void Equip(USceneComponent* InParent, FName InSocketName);
+
 protected:
 
 };

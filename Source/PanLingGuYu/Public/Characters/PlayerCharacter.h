@@ -45,10 +45,15 @@ private:
 	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	EActionState CharacterActionState = EActionState::EAS_Unoccupied;
 
+	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	ECharacterState CharacterState = ECharacterState::ECS_Unoccupied;
+
 	UPROPERTY(VisibleAnywhere)
 	AItem* CurrentOverlapItem = nullptr;
 
 public:
 	FORCEINLINE EActionState GetCharacterActionState() const { return CharacterActionState; }
-	void SetCharacterActionState(EActionState ActionState) { CharacterActionState = ActionState; }
+	FORCEINLINE ECharacterState GetCharacterState() const { return CharacterState; }
+	/*FORCEINLINE void SetCharacterActionState(EActionState ActionState) { CharacterActionState = ActionState; }
+	FORCEINLINE void SetCharacterState(ECharacterState State) { CharacterState = State; }*/
 };

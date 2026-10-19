@@ -31,6 +31,7 @@ protected:
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USphereComponent> InteractionSphere;
+
 private:
 	
 };
