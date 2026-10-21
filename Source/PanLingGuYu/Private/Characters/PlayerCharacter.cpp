@@ -5,7 +5,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Items/Gear.h"
+#include "Items/Weapon.h"
 
 APlayerCharacter::APlayerCharacter()
 {
@@ -61,10 +61,10 @@ void APlayerCharacter::Interact()
 {
 	if (!CurrentOverlapItem) { return; }
 
-	AGear* Gear = Cast<AGear>(CurrentOverlapItem);
-	if (Gear)
+	AWeapon* Weapon = Cast<AWeapon>(CurrentOverlapItem);
+	if (Weapon)
 	{
-		Gear->Equip(GetMesh(), FName("RightHandSocket"));
+		Weapon->Equip(GetMesh(), FName("RightHandSocket"));
 		CharacterState = ECharacterState::ECS_OneHandWeapon;
 	}
 }

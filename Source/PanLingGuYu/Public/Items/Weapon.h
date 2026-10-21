@@ -4,20 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "Items/Item.h"
-#include "Gear.generated.h"
+#include "Weapon.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PANLINGGUYU_API AGear : public AItem
+class PANLINGGUYU_API AWeapon : public AItem
 {
 	GENERATED_BODY()
-	
+
 public:
-	AGear();
+	AWeapon();
 	void Equip(USceneComponent* InParent, FName InSocketName);
 
 protected:
-
+	
 };
