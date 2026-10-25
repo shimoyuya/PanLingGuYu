@@ -9,7 +9,8 @@
 #include "PlayerCharacter.generated.h"
 
 class UAnimMontage;
-class Item;
+class AItem;
+class AWeapon;
 
 UCLASS()
 class PANLINGGUYU_API APlayerCharacter : public ACharacter,public IInteractionInterface
@@ -51,9 +52,13 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	AItem* CurrentOverlapItem = nullptr;
 
+	UPROPERTY(VisibleAnywhere)
+	AWeapon* EquippedWeapon = nullptr;
+
 public:
 	FORCEINLINE EActionState GetCharacterActionState() const { return CharacterActionState; }
 	FORCEINLINE ECharacterState GetCharacterState() const { return CharacterState; }
+	FORCEINLINE AWeapon* GetEquippedWeapon() const { return EquippedWeapon; }
 	/*FORCEINLINE void SetCharacterActionState(EActionState ActionState) { CharacterActionState = ActionState; }
 	FORCEINLINE void SetCharacterState(ECharacterState State) { CharacterState = State; }*/
 };

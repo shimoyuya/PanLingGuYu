@@ -64,7 +64,8 @@ void APlayerCharacter::Interact()
 	AWeapon* Weapon = Cast<AWeapon>(CurrentOverlapItem);
 	if (Weapon)
 	{
-		Weapon->Equip(GetMesh(), FName("RightHandSocket"));
+		Weapon->Equip(GetMesh(), FName("RightHandSocket"),this);
+		EquippedWeapon = Weapon;
 		CharacterState = ECharacterState::ECS_OneHandWeapon;
 	}
 }

@@ -28,5 +28,6 @@ void UPlayerAnimInstance::NativeUpdateAnimation(float DeltaTime)
 		bIsFalling = PlayerCharacterMovement->IsFalling();
 		CharacterActionState = PlayerCharacter->GetCharacterActionState();
 		CharacterState = PlayerCharacter->GetCharacterState();
+		EquippedWeapon = PlayerCharacter->GetEquippedWeapon();
 	}
 }

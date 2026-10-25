@@ -35,4 +35,7 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	ECharacterState CharacterState;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Movement")
+	class AWeapon* EquippedWeapon;
 };
