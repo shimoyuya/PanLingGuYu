@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
 
+class UAttributeComponent;
+
 UCLASS()
 class PANLINGGUYU_API ABaseCharacter : public ACharacter
 {
@@ -17,4 +19,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;	
+
+	UPROPERTY(VisibleAnywhere)
+	UAttributeComponent* AttributeComponent;
 };

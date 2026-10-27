@@ -3,6 +3,7 @@
 
 #include "Characters/EnemyCharacter.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/AttributeComponent.h"
 
 AEnemyCharacter::AEnemyCharacter()
 {
@@ -26,6 +27,15 @@ void AEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+float AEnemyCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	if (AttributeComponent)
+	{
+		AttributeComponent->ReceiveDamage(DamageAmount);
+	}
+	return DamageAmount;
 }
 
 void AEnemyCharacter::BeginPlay()

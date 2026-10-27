@@ -15,6 +15,11 @@ void UAttributeComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 
 }
 
+void UAttributeComponent::ReceiveDamage(float Damage)
+{
+	Health = FMath::Clamp(Health - Damage, 0, MaxHealth);
+}
+
 void UAttributeComponent::BeginPlay()
 {
 	Super::BeginPlay();

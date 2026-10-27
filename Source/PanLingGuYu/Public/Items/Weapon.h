@@ -16,10 +16,12 @@ class PANLINGGUYU_API AWeapon : public AItem
 
 public:
 	AWeapon();
-	void Equip(USceneComponent* InParent, FName InSocketName,AActor* NewOwner);
+	void Equip(USceneComponent* InParent, FName InSocketName, AActor* NewOwner, APawn* NewInstigator);
 
 	UFUNCTION(BlueprintCallable)
 	void SetWeaponCollisionEnabled(ECollisionEnabled::Type CollisionEnabled);
+
+	TArray<AActor*> IgnoreActors;
 
 protected:
 	virtual void BeginPlay() override;

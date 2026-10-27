@@ -5,6 +5,7 @@
 #include "Components/SphereComponent.h"
 #include "Components/BoxComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Kismet/GameplayStatics.h"
 
 AWeapon::AWeapon()
 {
@@ -21,16 +22,18 @@ AWeapon::AWeapon()
 	BoxTraceEnd->SetupAttachment(GetRootComponent());
 }
 
-void AWeapon::Equip(USceneComponent* InParent, FName InSocketName, AActor* NewOwner)
+void AWeapon::Equip(USceneComponent* InParent, FName InSocketName, AActor* NewOwner, APawn* NewInstigator)
 {
 	ItemMesh->AttachToComponent(InParent, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), InSocketName);
 	InteractionSphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	SetOwner(NewOwner);
+	SetInstigator(NewInstigator);
 }
 
 void AWeapon::SetWeaponCollisionEnabled(ECollisionEnabled::Type CollisionEnabled)
 {
 	WeaponBox->SetCollisionEnabled(CollisionEnabled);
+	IgnoreActors.Empty();
 }
 
 void AWeapon::BeginPlay()
@@ -51,6 +54,11 @@ void AWeapon::BoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Other
 	ActorsToIgnore.Add(this);
 	ActorsToIgnore.Add(GetOwner());
 
+	for (AActor* Actor : IgnoreActors)
+	{
+		ActorsToIgnore.AddUnique(Actor);
+	}
+
 	UKismetSystemLibrary::BoxTraceSingle(
 		this,
 		Start,
@@ -64,13 +72,21 @@ void AWeapon::BoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Other
 		BoxHit,
 		true
 	);
+	IgnoreActors.AddUnique(BoxHit.GetActor());
 
 	if (BoxHit.GetActor())
 	{
+		UGameplayStatics::ApplyDamage(
+			BoxHit.GetActor(),
+			20.f,
+			GetInstigator()->GetController(),
+			this,
+			UDamageType::StaticClass()
+		);
+
 		const FString HitActorName = BoxHit.GetActor()->GetActorNameOrLabel();
 		if (GEngine) {
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, FString::Printf(TEXT("Overlap Actor Name:%s"), *HitActorName));
 		}
 	}
-	
 }

@@ -15,8 +15,15 @@ class PANLINGGUYU_API UAttributeComponent : public UActorComponent
 public:	
 	UAttributeComponent();
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	void ReceiveDamage(float Damage);
 
 protected:
 	virtual void BeginPlay() override;
 		
+private:
+	UPROPERTY(EditAnywhere, Category = "Attributes")
+	float Health;
+
+	UPROPERTY(EditAnywhere, Category = "Attributes")
+	float MaxHealth;
 };
