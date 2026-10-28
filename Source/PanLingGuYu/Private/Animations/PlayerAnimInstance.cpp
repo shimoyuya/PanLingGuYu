@@ -3,31 +3,21 @@
 
 #include "Animations/PlayerAnimInstance.h"
 #include "Characters/PlayerCharacter.h"
-#include "GameFramework/CharacterMovementComponent.h"
-#include "Kismet/KismetMathLibrary.h"
 
 void UPlayerAnimInstance::NativeInitializeAnimation()
 {
 	Super::NativeInitializeAnimation();
 
-	PlayerCharacter = Cast<APlayerCharacter>(TryGetPawnOwner());
-
-	if (PlayerCharacter)
-	{
-		PlayerCharacterMovement = PlayerCharacter->GetCharacterMovement();
-	}
+	PlayerCharacter = Cast<APlayerCharacter>(Character);
 }
 
 void UPlayerAnimInstance::NativeUpdateAnimation(float DeltaTime)
 {
 	Super::NativeUpdateAnimation(DeltaTime);
 
-	if (PlayerCharacterMovement)
+	if (CharacterMovement && PlayerCharacter)
 	{
-		GroundSpeed = UKismetMathLibrary::VSizeXY(PlayerCharacterMovement->Velocity);
-		bIsFalling = PlayerCharacterMovement->IsFalling();
 		CharacterActionState = PlayerCharacter->GetCharacterActionState();
 		CharacterState = PlayerCharacter->GetCharacterState();
-		EquippedWeapon = PlayerCharacter->GetEquippedWeapon();
 	}
 }

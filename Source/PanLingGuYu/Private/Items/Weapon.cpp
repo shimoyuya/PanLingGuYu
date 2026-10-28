@@ -6,6 +6,7 @@
 #include "Components/BoxComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/GameplayStatics.h"
+#include "Interfaces/HitInterface.h"
 
 AWeapon::AWeapon()
 {
@@ -63,12 +64,12 @@ void AWeapon::BoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Other
 		this,
 		Start,
 		End,
-		FVector(5.f),
+		BoxTraceExtent,
 		BoxTraceStart->GetComponentRotation(),
 		ETraceTypeQuery::TraceTypeQuery1,
 		false,
 		ActorsToIgnore,
-		EDrawDebugTrace::ForDuration,
+		bShowBoxDebug ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
 		BoxHit,
 		true
 	);
@@ -76,17 +77,19 @@ void AWeapon::BoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Other
 
 	if (BoxHit.GetActor())
 	{
+
 		UGameplayStatics::ApplyDamage(
 			BoxHit.GetActor(),
-			20.f,
+			Damage,
 			GetInstigator()->GetController(),
 			this,
 			UDamageType::StaticClass()
 		);
 
-		const FString HitActorName = BoxHit.GetActor()->GetActorNameOrLabel();
-		if (GEngine) {
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, FString::Printf(TEXT("Overlap Actor Name:%s"), *HitActorName));
+		IHitInterface* HitInterface = Cast<IHitInterface>(BoxHit.GetActor());
+		if (HitInterface)
+		{
+			HitInterface->Execute_GetHit(BoxHit.GetActor(), BoxHit.ImpactPoint, GetOwner());
 		}
 	}
 }

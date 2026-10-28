@@ -22,3 +22,11 @@ void ABaseCharacter::BeginPlay()
 	Super::BeginPlay();
 	
 }
+
+void ABaseCharacter::GetHit_Implementation(const FVector& ImpactPoint, AActor* Hitter)
+{
+	const FString HitActorName = this->GetActorNameOrLabel();
+	if (GEngine) {
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, FString::Printf(TEXT("GetHit Actor Name:%s"), *HitActorName));
+	}
+}

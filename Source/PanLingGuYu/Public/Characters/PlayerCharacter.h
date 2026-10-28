@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+#include "Characters/BaseCharacter.h"
 #include "Characters/CharacterTypes.h"
 #include "Interfaces/InteractionInterface.h"
 #include "PlayerCharacter.generated.h"
@@ -13,7 +13,7 @@ class AItem;
 class AWeapon;
 
 UCLASS()
-class PANLINGGUYU_API APlayerCharacter : public ACharacter,public IInteractionInterface
+class PANLINGGUYU_API APlayerCharacter : public ABaseCharacter,public IInteractionInterface
 {
 	GENERATED_BODY()
 
@@ -52,13 +52,7 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	AItem* CurrentOverlapItem = nullptr;
 
-	UPROPERTY(VisibleAnywhere)
-	AWeapon* EquippedWeapon = nullptr;
-
 public:
 	FORCEINLINE EActionState GetCharacterActionState() const { return CharacterActionState; }
 	FORCEINLINE ECharacterState GetCharacterState() const { return CharacterState; }
-	FORCEINLINE AWeapon* GetEquippedWeapon() const { return EquippedWeapon; }
-	/*FORCEINLINE void SetCharacterActionState(EActionState ActionState) { CharacterActionState = ActionState; }
-	FORCEINLINE void SetCharacterState(ECharacterState State) { CharacterState = State; }*/
 };

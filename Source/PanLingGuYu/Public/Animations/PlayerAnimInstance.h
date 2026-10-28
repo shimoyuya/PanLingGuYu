@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Animation/AnimInstance.h"
+#include "Animations/CharacterAnimInstanceBase.h"
 #include "Characters/CharacterTypes.h"
 #include "PlayerAnimInstance.generated.h"
 
@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class PANLINGGUYU_API UPlayerAnimInstance : public UAnimInstance
+class PANLINGGUYU_API UPlayerAnimInstance : public UCharacterAnimInstanceBase
 {
 	GENERATED_BODY()
 public:
@@ -22,20 +22,8 @@ public:
 	class APlayerCharacter* PlayerCharacter;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
-	class UCharacterMovementComponent* PlayerCharacterMovement;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Movement")
-	float GroundSpeed;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Movement")
-	bool bIsFalling;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	EActionState CharacterActionState;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	ECharacterState CharacterState;
-
-	UPROPERTY(BlueprintReadOnly, Category = "Movement")
-	class AWeapon* EquippedWeapon;
 };
