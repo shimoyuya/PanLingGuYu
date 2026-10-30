@@ -26,4 +26,7 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Attributes")
 	float MaxHealth;
+
+public:
+	bool IsAlive() { return Health > 0.f; }
 };

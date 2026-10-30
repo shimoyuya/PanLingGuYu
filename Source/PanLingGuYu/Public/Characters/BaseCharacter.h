@@ -23,6 +23,13 @@ protected:
 	virtual void BeginPlay() override;	
 	virtual void GetHit_Implementation(const FVector& ImpactPoint, AActor* Hitter) override;
 
+	UFUNCTION(BlueprintNativeEvent)
+	void Die();
+
+	float Directional(const FVector& ImpactPoint);
+
+	void PlayMontageSection(UAnimMontage* Montage, const FName& SectionName);
+
 	UPROPERTY(VisibleAnywhere)
 	UAttributeComponent* AttributeComponent;
 
@@ -30,6 +37,11 @@ protected:
 	AWeapon* EquippedWeapon = nullptr;
 
 private:
+	UPROPERTY(EditDefaultsOnly, Category = "Montage")
+	UAnimMontage* HitReactMontage;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Montage")
+	UAnimMontage* DeathMontage;
 
 public:
 	FORCEINLINE AWeapon* GetEquippedWeapon() const { return EquippedWeapon; }

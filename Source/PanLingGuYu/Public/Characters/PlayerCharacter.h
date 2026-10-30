@@ -37,10 +37,10 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* Camera;
 
-	UPROPERTY(EditAnywhere, Category = "Animation")
+	UPROPERTY(EditAnywhere, Category = "Montage")
 	UAnimMontage* AttackMontage;
 
-	UPROPERTY(EditAnywhere, Category = "Animation")
+	UPROPERTY(EditAnywhere, Category = "Montage")
 	UAnimMontage* DodgeMontage;
 
 	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))

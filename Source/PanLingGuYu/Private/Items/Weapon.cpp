@@ -33,8 +33,8 @@ void AWeapon::Equip(USceneComponent* InParent, FName InSocketName, AActor* NewOw
 
 void AWeapon::SetWeaponCollisionEnabled(ECollisionEnabled::Type CollisionEnabled)
 {
-	WeaponBox->SetCollisionEnabled(CollisionEnabled);
 	IgnoreActors.Empty();
+	WeaponBox->SetCollisionEnabled(CollisionEnabled);
 }
 
 void AWeapon::BeginPlay()

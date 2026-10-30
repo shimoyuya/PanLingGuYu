@@ -36,25 +36,16 @@ void APlayerCharacter::Attack()
 {
 	if (CharacterActionState != EActionState::EAS_Unoccupied) return;
 
-	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-	if (AnimInstance)
-	{
-		AnimInstance->Montage_Play(AttackMontage);
-		AnimInstance->Montage_JumpToSection(FName("Attack1"),AttackMontage);
-		CharacterActionState = EActionState::EAS_Attacking;
-	}
+	PlayMontageSection(AttackMontage, FName("Attack1"));
+	CharacterActionState = EActionState::EAS_Attacking;
 }
 
 void APlayerCharacter::Dodge()
 {
 	if (CharacterActionState != EActionState::EAS_Unoccupied) return;
 
-	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-	if (AnimInstance)
-	{
-		AnimInstance->Montage_Play(DodgeMontage);
-		CharacterActionState = EActionState::EAS_Dodge;
-	}
+	PlayMontageSection(DodgeMontage, FName("Dodge"));
+	CharacterActionState = EActionState::EAS_Dodge;
 }
 
 void APlayerCharacter::Interact()
