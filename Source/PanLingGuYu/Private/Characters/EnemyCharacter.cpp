@@ -23,12 +23,6 @@ void AEnemyCharacter::Tick(float DeltaTime)
 
 }
 
-void AEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
-
 float AEnemyCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
 	if (AttributeComponent)
@@ -36,6 +30,13 @@ float AEnemyCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Damage
 		AttributeComponent->ReceiveDamage(DamageAmount);
 	}
 	return DamageAmount;
+}
+
+void AEnemyCharacter::Attack()
+{
+	Super::Attack();
+
+	PlayMontageSection(AttackMontage, FName("Attack1"));
 }
 
 void AEnemyCharacter::BeginPlay()

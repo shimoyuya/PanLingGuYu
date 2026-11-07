@@ -34,7 +34,9 @@ void APlayerCharacter::Tick(float DeltaTime)
 
 void APlayerCharacter::Attack()
 {
-	if (CharacterActionState != EActionState::EAS_Unoccupied) return;
+	Super::Attack();
+
+	if (CharacterActionState != EActionState::EAS_Unoccupied && EquippedWeapon) return;
 
 	PlayMontageSection(AttackMontage, FName("Attack1"));
 	CharacterActionState = EActionState::EAS_Attacking;

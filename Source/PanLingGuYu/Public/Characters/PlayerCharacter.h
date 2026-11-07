@@ -21,7 +21,7 @@ public:
 	APlayerCharacter();
 	virtual void Tick(float DeltaTime) override;
 
-	void Attack();
+	virtual void Attack() override;
 	void Dodge();
 	void Interact();
 
@@ -36,12 +36,6 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* Camera;
-
-	UPROPERTY(EditAnywhere, Category = "Montage")
-	UAnimMontage* AttackMontage;
-
-	UPROPERTY(EditAnywhere, Category = "Montage")
-	UAnimMontage* DodgeMontage;
 
 	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	EActionState CharacterActionState = EActionState::EAS_Unoccupied;

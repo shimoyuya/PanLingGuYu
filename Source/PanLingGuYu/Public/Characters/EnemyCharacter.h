@@ -6,6 +6,8 @@
 #include "Characters/BaseCharacter.h"
 #include "EnemyCharacter.generated.h"
 
+class UBehaviorTree;
+
 UCLASS()
 class PANLINGGUYU_API AEnemyCharacter : public ABaseCharacter
 {
@@ -14,11 +16,17 @@ class PANLINGGUYU_API AEnemyCharacter : public ABaseCharacter
 public:
 	AEnemyCharacter();
 	virtual void Tick(float DeltaTime) override;
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
+	virtual void Attack() override;
+	
 protected:
 	virtual void BeginPlay() override;
 
 private:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AI", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UBehaviorTree> BehaviorTree;
 
+public:
+	FORCEINLINE  UBehaviorTree* GetBehaviorTree() const { return BehaviorTree; }
 };

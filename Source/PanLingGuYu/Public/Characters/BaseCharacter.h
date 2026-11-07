@@ -19,6 +19,8 @@ public:
 	ABaseCharacter();
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void Attack();
+
 protected:
 	virtual void BeginPlay() override;	
 	virtual void GetHit_Implementation(const FVector& ImpactPoint, AActor* Hitter) override;
@@ -36,12 +38,20 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	AWeapon* EquippedWeapon = nullptr;
 
-private:
+	UPROPERTY(EditAnywhere, Category = "Montage")
+	UAnimMontage* AttackMontage;
+
+	UPROPERTY(EditAnywhere, Category = "Montage")
+	UAnimMontage* DodgeMontage;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Montage")
 	UAnimMontage* HitReactMontage;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Montage")
 	UAnimMontage* DeathMontage;
+
+private:
+	
 
 public:
 	FORCEINLINE AWeapon* GetEquippedWeapon() const { return EquippedWeapon; }

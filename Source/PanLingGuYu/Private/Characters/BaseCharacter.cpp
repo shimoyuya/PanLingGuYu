@@ -17,6 +17,11 @@ void ABaseCharacter::Tick(float DeltaTime)
 
 }
 
+void ABaseCharacter::Attack()
+{
+
+}
+
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
